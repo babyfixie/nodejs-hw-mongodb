@@ -18,3 +18,23 @@ export const getContactByIdService = async (contactId) => {
     throw new Error('Error fetching contact by id');
   }
 };
+
+export const createContactService = async (contactData) => {
+  const newContact = await Contact.create(contactData);
+  return newContact;
+};
+
+
+export const patchContactService = async (contactId, updateData) => {
+  const updatedContact = await Contact.findByIdAndUpdate(
+    contactId,
+    updateData,
+    { new: true } 
+  );
+  return updatedContact;
+};
+
+export const deleteContactService = async (contactId) => {
+  const deletedContact = await Contact.findByIdAndDelete(contactId);
+  return deletedContact;
+};
