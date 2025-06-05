@@ -11,16 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nastyyyyya/nodejs-hw-mongodb.git"
+    "url": "git+https://github.com/babyfixie/nodejs-hw-mongodb.git"
   },
   "keywords": [],
-  "author": "Anastasia Paslavska <a.paslavska2206@gmail.com>",
+  "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/Nastyyyyya/nodejs-hw-mongodb/issues"
+    "url": "https://github.com/babyfixie/nodejs-hw-mongodb/issues"
   },
-  "homepage": "https://github.com/Nastyyyyya/nodejs-hw-mongodb#readme",
+  "homepage": "https://github.com/babyfixie/nodejs-hw-mongodb#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
