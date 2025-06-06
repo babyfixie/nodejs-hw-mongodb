@@ -1,9 +1,33 @@
 import Contact from '../models/contactModel.js';
 
-export const getAllContacts = async () => {
+export const getAllContacts = async (
+  page,
+  perPage,
+  sortBy,
+  sortOrder,
+  filter = {}
+) => {
   try {
-    const contacts = await Contact.find();
-    return contacts;
+    const sortOptions = {};
+    if (sortBy) {
+      sortOptions[sortBy] = sortOrder === 'desc' ? -1 : 1;
+    }
+
+    const skip = (page - 1) * perPage;
+
+    const contactsPromise = Contact.find(filter)
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(perPage);
+
+    const totalItemsPromise = Contact.countDocuments(filter);
+
+    const [contacts, totalItems] = await Promise.all([
+      contactsPromise,
+      totalItemsPromise,
+    ]);
+
+    return { contacts, totalItems };
   } catch (err) {
     console.error('Error fetching contacts:', err);
     throw new Error('Error fetching contacts');
@@ -24,12 +48,11 @@ export const createContactService = async (contactData) => {
   return newContact;
 };
 
-
 export const patchContactService = async (contactId, updateData) => {
   const updatedContact = await Contact.findByIdAndUpdate(
     contactId,
     updateData,
-    { new: true } 
+    { new: true }
   );
   return updatedContact;
 };
