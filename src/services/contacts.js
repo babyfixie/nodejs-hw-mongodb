@@ -1,12 +1,12 @@
 import Contact from '../models/contactModel.js';
 
-export const getAllContacts = async (
+export const getAllContactsService = async ({
   page,
   perPage,
   sortBy,
   sortOrder,
-  filter = {}
-) => {
+  filter,
+}) => {
   try {
     const sortOptions = {};
     if (sortBy) {
@@ -34,9 +34,9 @@ export const getAllContacts = async (
   }
 };
 
-export const getContactByIdService = async (contactId) => {
+export const getContactByIdService = async (contactId, userId) => {
   try {
-    const contact = await Contact.findById(contactId);
+    const contact = await Contact.findOne({ _id: contactId, userId });
     return contact;
   } catch {
     throw new Error('Error fetching contact by id');
@@ -48,16 +48,19 @@ export const createContactService = async (contactData) => {
   return newContact;
 };
 
-export const patchContactService = async (contactId, updateData) => {
-  const updatedContact = await Contact.findByIdAndUpdate(
-    contactId,
+export const patchContactService = async (contactId, updateData, userId) => {
+  const updatedContact = await Contact.findOneAndUpdate(
+    { _id: contactId, userId },
     updateData,
     { new: true }
   );
   return updatedContact;
 };
 
-export const deleteContactService = async (contactId) => {
-  const deletedContact = await Contact.findByIdAndDelete(contactId);
+export const deleteContactService = async (contactId, userId) => {
+  const deletedContact = await Contact.findOneAndDelete({
+    _id: contactId,
+    userId,
+  });
   return deletedContact;
 };
