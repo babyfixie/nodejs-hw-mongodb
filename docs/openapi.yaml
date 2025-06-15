@@ -12,7 +12,7 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
-  - url: https://nodejs-hw-mongodb-kyiq.onrender.com
+  - url: https://mongol-fha8.onrender.com
   - url: https://example.com/api/v1
 paths:
   /contacts:
